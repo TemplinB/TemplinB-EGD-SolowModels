@@ -1,0 +1,19 @@
+project:
+  type: website
+
+website:
+  title: "Solow Growth Analysis"
+  navbar:
+    left:
+      - text: "Home"
+        file: index.qmd
+
+format:
+  html:
+    theme: cosmo
+    
+execute:
+  warning: false
+  message: false
+  echo: false
+  include: true

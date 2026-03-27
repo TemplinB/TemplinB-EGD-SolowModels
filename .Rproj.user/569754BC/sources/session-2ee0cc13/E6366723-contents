@@ -1,0 +1,867 @@
+---
+title: "Development"
+format: html
+editor: visual
+---
+
+```{r}
+library(readr)
+library(dplyr)
+library(janitor)
+library(readxl)
+library(ggplot2)
+```
+
+```{r}
+heritage_index <- read_csv("heritage-index-of-economic-freedom-2026-03-25_1950.csv")
+head(heritage_index, 4)
+
+heritage_index <- clean_names(heritage_index)
+
+variable.names(heritage_index)
+
+```
+
+```{r}
+
+heritage_2025 <- heritage_index %>% 
+  filter(index_year == 2026) %>% 
+    filter(country %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+head(heritage_2025, 8)
+
+heritage_subset <- heritage_index %>% 
+  filter(country %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+head(heritage_subset)
+
+```
+
+```{r}
+library(ggplot2)
+library(dplyr)
+
+# ======== Overall Score ========
+
+heritage_2025 %>%
+  mutate(overall_score = as.numeric(overall_score)) %>% 
+  arrange(overall_score) %>%   # sort for clean visual
+  ggplot(aes(x = overall_score, y = reorder(country, overall_score))) +
+  geom_col(fill = "#7FE8D7") +
+  scale_x_continuous(limits = c(0, 100)) +
+  labs(
+    title = "Overall Score by Country",
+    x = "Overall Score",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ======== Property Rights ========
+
+heritage_2025 %>%
+  mutate(property_rights = as.numeric(property_rights)) %>% 
+  arrange(property_rights) %>%   # sort for clean visual
+  ggplot(aes(x = property_rights, y = reorder(country, property_rights))) +
+  geom_col(fill = "#7FE8D7") +
+  scale_x_continuous(limits = c(0, 100)) +
+  labs(
+    title = "property_rights by Country",
+    x = "property_rights",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ======== Government Integrity ========
+
+heritage_2025 %>%
+  mutate(government_integrity = as.numeric(government_integrity)) %>% 
+  arrange(government_integrity) %>%   # sort for clean visual
+  ggplot(aes(x = government_integrity, y = reorder(country, government_integrity))) +
+  geom_col(fill = "#7FE8D7") +
+  scale_x_continuous(limits = c(0, 100)) +
+  labs(
+    title = "government_integrity by Country",
+    x = "government_integrity",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ======== Judicial Effectiveness ========
+
+heritage_2025 %>%
+  mutate(judicial_effectiveness = as.numeric(judicial_effectiveness)) %>% 
+  arrange(judicial_effectiveness) %>%   # sort for clean visual
+  ggplot(aes(x = judicial_effectiveness, y = reorder(country, judicial_effectiveness))) +
+  geom_col(fill = "#7FE8D7") +
+  scale_x_continuous(limits = c(0, 100)) +
+  labs(
+    title = "judicial_effectiveness by Country",
+    x = "judicial_effectiveness",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ======== Tax Burdens ========
+
+heritage_2025 %>%
+  mutate(tax_burden = as.numeric(tax_burden)) %>% 
+  arrange(tax_burden) %>%   # sort for clean visual
+  ggplot(aes(x = tax_burden, y = reorder(country, tax_burden))) +
+  geom_col(fill = "#7FE8D7") +
+  scale_x_continuous(limits = c(0, 100)) +
+  labs(
+    title = "tax_burden by Country",
+    x = "tax_burden",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ======== Government Spending ========
+
+heritage_2025 %>%
+  mutate(government_spending = as.numeric(government_spending)) %>% 
+  arrange(government_spending) %>%   # sort for clean visual
+  ggplot(aes(x = government_spending, y = reorder(country, government_spending))) +
+  geom_col(fill = "#7FE8D7") +
+  scale_x_continuous(limits = c(0, 100)) +
+  labs(
+    title = "government_spending by Country",
+    x = "government_spending",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ======== Fiscal Health ========
+
+heritage_2025 %>%
+  mutate(fiscal_health = as.numeric(fiscal_health)) %>% 
+  arrange(fiscal_health) %>%   # sort for clean visual
+  ggplot(aes(x = fiscal_health, y = reorder(country, fiscal_health))) +
+  geom_col(fill = "#7FE8D7") +
+  scale_x_continuous(limits = c(0, 100)) +
+  labs(
+    title = "fiscal_health by Country",
+    x = "fiscal_health",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ======== Business Freedom ========
+
+heritage_2025 %>%
+  mutate(business_freedom = as.numeric(business_freedom)) %>% 
+  arrange(business_freedom) %>%   # sort for clean visual
+  ggplot(aes(x = business_freedom, y = reorder(country, business_freedom))) +
+  geom_col(fill = "#7FE8D7") +
+  scale_x_continuous(limits = c(0, 100)) +
+  labs(
+    title = "business_freedom by Country",
+    x = "business_freedom",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ======== Labor Freedom ========
+
+heritage_2025 %>%
+  mutate(labor_freedom = as.numeric(labor_freedom)) %>% 
+  arrange(labor_freedom) %>%   # sort for clean visual
+  ggplot(aes(x = labor_freedom, y = reorder(country, labor_freedom))) +
+  geom_col(fill = "#7FE8D7") +
+  scale_x_continuous(limits = c(0, 100)) +
+  labs(
+    title = "labor_freedom by Country",
+    x = "labor_freedom",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ======== Monetary Freedom ========
+
+heritage_2025 %>%
+  mutate(monetary_freedom = as.numeric(monetary_freedom)) %>% 
+  arrange(monetary_freedom) %>%   # sort for clean visual
+  ggplot(aes(x = monetary_freedom, y = reorder(country, monetary_freedom))) +
+  geom_col(fill = "#7FE8D7") +
+  scale_x_continuous(limits = c(0, 100)) +
+  labs(
+    title = "monetary_freedom by Country",
+    x = "monetary_freedom",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ======== Trade Freedom ========
+
+heritage_2025 %>%
+  mutate(trade_freedom = as.numeric(trade_freedom)) %>% 
+  arrange(trade_freedom) %>%   # sort for clean visual
+  ggplot(aes(x = trade_freedom, y = reorder(country, trade_freedom))) +
+  geom_col(fill = "#7FE8D7") +
+  scale_x_continuous(limits = c(0, 100)) +
+  labs(
+    title = "trade_freedom by Country",
+    x = "trade_freedom",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ======== Investment Freedom ========
+
+heritage_2025 %>%
+  mutate(investment_freedom = as.numeric(investment_freedom)) %>% 
+  arrange(investment_freedom) %>%   # sort for clean visual
+  ggplot(aes(x = investment_freedom, y = reorder(country, investment_freedom))) +
+  geom_col(fill = "#7FE8D7") +
+  scale_x_continuous(limits = c(0, 100)) +
+  labs(
+    title = "investment_freedom by Country",
+    x = "investment_freedom",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ======== Financial Freedom ========
+
+heritage_2025 %>%
+  mutate(financial_freedom = as.numeric(financial_freedom)) %>% 
+  arrange(financial_freedom) %>%   # sort for clean visual
+  ggplot(aes(x = financial_freedom, y = reorder(country, financial_freedom))) +
+  geom_col(fill = "#7FE8D7") +
+  scale_x_continuous(limits = c(0, 100)) +
+  labs(
+    title = "financial_freedom by Country",
+    x = "financial_freedom",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+```
+
+*Sierra Leone*
+
+- Lowest in Overall Score
+- Low Property Rights
+- Fantastic Tax Burden
+- Government Spending is Great??
+- Low Business Freedom
+- Labor Freedom is Low Low
+- Monetary Freedom is Low
+- Decent Trade
+
+```{r}
+# ==========================
+
+b_ready_index <- read_excel("01_B-READY-2025-PILLAR-TOPIC-SCORES.xlsx", sheet = "00_B-READY_Pillar_Score")
+b_ready_index <- b_ready_index %>%
+  select(-`Economy Code`) %>% 
+  filter(Economy %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+head(b_ready_index)
+
+# ==========================
+
+b_ready_business_entry <- read_excel("01_B-READY-2025-PILLAR-TOPIC-SCORES.xlsx", sheet = "01_Business_Entry", skip = 3)
+b_ready_business_entry <- b_ready_business_entry %>%
+ select(Economy, `Business Entry Overall`, `Pillar 1 Overall`, `Pillar 2 Overall`, `Pillar 3 Overall`) %>%
+ filter(Economy %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+head(b_ready_business_entry)
+
+# ==========================
+
+b_ready_business_location <- read_excel("01_B-READY-2025-PILLAR-TOPIC-SCORES.xlsx", sheet = "02_Business_Location", skip = 3)
+b_ready_business_location <- b_ready_business_location %>% 
+ select(Economy, `Business Location Overall`, `Pillar 1 Overall`, `Pillar 2 Overall`, `Pillar 3 Overall`) %>% 
+ filter(Economy %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+head(b_ready_business_location)
+
+# ==========================
+
+b_ready_utility_services <- read_excel("01_B-READY-2025-PILLAR-TOPIC-SCORES.xlsx", sheet = "03_Utility_Services", skip = 3)
+b_ready_utility_services <- b_ready_utility_services %>% 
+ select(Economy, `Utility Services Overall`, `Pillar 1 Overall`, `Pillar 2 Overall`, `Pillar 3 Overall`) %>% 
+ filter(Economy %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+head(b_ready_utility_services)
+
+# ==========================
+
+b_ready_labor <- read_excel("01_B-READY-2025-PILLAR-TOPIC-SCORES.xlsx", sheet = "04_Labor", skip = 3)
+b_ready_labor <- b_ready_labor %>% 
+ select(Economy, `Labor Overall`, `Pillar 1 Overall`, `Pillar 2 Overall`, `Pillar 3 Overall`) %>% 
+ filter(Economy %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+head(b_ready_labor)
+
+# ==========================
+
+b_ready_financial_services <- read_excel("01_B-READY-2025-PILLAR-TOPIC-SCORES.xlsx", sheet = "05_Financial_Services", skip = 3)
+b_ready_financial_services <- b_ready_financial_services %>% 
+ select(Economy, `Financial Services Overall`, `Pillar 1 Overall`, `Pillar 2 Overall`, `Pillar 3 Overall`) %>% 
+ filter(Economy %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+head(b_ready_financial_services)
+
+# ==========================
+
+b_ready_international_trade <- read_excel("01_B-READY-2025-PILLAR-TOPIC-SCORES.xlsx", sheet = "06_International_Trade", skip = 3)
+b_ready_international_trade <- b_ready_international_trade %>% 
+ select(Economy, `International Trade Overall`, `Pillar 1 Overall`, `Pillar 2 Overall`, `Pillar 3 Overall`) %>% 
+ filter(Economy %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+head(b_ready_international_trade)
+
+# ==========================
+
+b_ready_taxation <- read_excel("01_B-READY-2025-PILLAR-TOPIC-SCORES.xlsx", sheet = "07_Taxation", skip = 3)
+b_ready_taxation <- b_ready_taxation %>% 
+ select(Economy, `Taxation Overall`, `Pillar 1 Overall`, `Pillar 2 Overall`, `Pillar 3 Overall`) %>% 
+ filter(Economy %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+head(b_ready_taxation)
+
+# ==========================
+
+b_ready_dispute_resolution <- read_excel("01_B-READY-2025-PILLAR-TOPIC-SCORES.xlsx", sheet = "08_Dispute_Resolution", skip = 3)
+b_ready_dispute_resolution <- b_ready_dispute_resolution %>% 
+ select(Economy, `Dispute Resolution Overall`, `Pillar 1 Overall`, `Pillar 2 Overall`, `Pillar 3 Overall`) %>% 
+ filter(Economy %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+head(b_ready_dispute_resolution)
+
+# ==========================
+
+b_ready_market_competition <- read_excel("01_B-READY-2025-PILLAR-TOPIC-SCORES.xlsx", sheet = "09_Market_Competition", skip = 3)
+b_ready_market_competition <- b_ready_market_competition %>% 
+ select(Economy, `Market Competition Overall`, `Pillar 1 Overall`, `Pillar 2 Overall`, `Pillar 3 Overall`) %>% 
+ filter(Economy %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+head(b_ready_market_competition)
+
+# ==========================
+
+b_ready_business_insolvency <- read_excel("01_B-READY-2025-PILLAR-TOPIC-SCORES.xlsx", sheet = "10_Business_Insolvency", skip = 3)
+b_ready_business_insolvency <- b_ready_business_insolvency %>% 
+ select(Economy, `Business Insolvency Overall`, `Pillar 1 Overall`, `Pillar 2 Overall`, `Pillar 3 Overall`) %>% 
+ filter(Economy %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+head(b_ready_business_insolvency)
+
+```
+
+```{r}
+
+# ==========================
+
+b_ready_business_entry %>%
+  ggplot(aes(
+    x = `Business Entry Overall`,
+    y = reorder(Economy, `Business Entry Overall`)
+  )) +
+  geom_col(fill = "#7FE8D7") +
+  scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
+  labs(
+    title = "Business Entry Overall by Country",
+    x = "Business Entry Overall",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ==========================
+
+b_ready_business_location %>%
+  ggplot(aes(
+    x = `Business Location Overall`,
+    y = reorder(Economy, `Business Location Overall`)
+  )) +
+  geom_col(fill = "#7FE8D7") +
+  scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
+  labs(
+    title = "Business Location Overall by Country",
+    x = "Business Location Overall",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ==========================
+
+b_ready_utility_services %>%
+  ggplot(aes(
+    x = `Utility Services Overall`,
+    y = reorder(Economy, `Utility Services Overall`)
+  )) +
+  geom_col(fill = "#7FE8D7") +
+  scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
+  labs(
+    title = "Utility Services Overall by Country",
+    x = "Utility_Services Overall",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ==========================
+
+b_ready_labor %>%
+  ggplot(aes(
+    x = `Labor Overall`,
+    y = reorder(Economy, `Labor Overall`)
+  )) +
+  geom_col(fill = "#7FE8D7") +
+  scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
+  labs(
+    title = "Labor Overall by Country",
+    x = "Labor Overall",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ==========================
+
+b_ready_financial_services %>%
+  ggplot(aes(
+    x = `Financial Services Overall`,
+    y = reorder(Economy, `Financial Services Overall`)
+  )) +
+  geom_col(fill = "#7FE8D7") +
+  scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
+  labs(
+    title = "Financial Services Overall by Country",
+    x = "Financial Services Overall",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ==========================
+
+b_ready_international_trade %>%
+  ggplot(aes(
+    x = `International Trade Overall`,
+    y = reorder(Economy, `International Trade Overall`)
+  )) +
+  geom_col(fill = "#7FE8D7") +
+  scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
+  labs(
+    title = "International Trade Overall by Country",
+    x = "International Trade Overall",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ==========================
+
+b_ready_taxation %>%
+  ggplot(aes(
+    x = `Taxation Overall`,
+    y = reorder(Economy, `Taxation Overall`)
+  )) +
+  geom_col(fill = "#7FE8D7") +
+  scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
+  labs(
+    title = "Taxation Overall by Country",
+    x = "Taxation Overall",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ==========================
+
+b_ready_dispute_resolution %>%
+  ggplot(aes(
+    x = `Dispute Resolution Overall`,
+    y = reorder(Economy, `Dispute Resolution Overall`)
+  )) +
+  geom_col(fill = "#7FE8D7") +
+  scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
+  labs(
+    title = "Dispute Resolution Overall by Country",
+    x = "Dispute Resolution Overall",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ==========================
+
+b_ready_market_competition %>%
+  ggplot(aes(
+    x = `Market Competition Overall`,
+    y = reorder(Economy, `Market Competition Overall`)
+  )) +
+  geom_col(fill = "#7FE8D7") +
+  scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
+  labs(
+    title = "Market Competition Overall by Country",
+    x = "Market Competition Overall",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ==========================
+
+b_ready_business_insolvency %>%
+  ggplot(aes(
+    x = `Business Insolvency Overall`,
+    y = reorder(Economy, `Business Insolvency Overall`)
+  )) +
+  geom_col(fill = "#7FE8D7") +
+  scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
+  labs(
+    title = "Business Insolvency Overall by Country",
+    x = "Business Insolvency Overall",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+
+```
+
+*Sierra Leone*
+
+```{r}
+# Solow Growth Model DataFrames
+
+# =============== Y
+# https://data360.worldbank.org/en/indicator/WB_WDI_NY_GDP_MKTP_PP_CD
+
+gdp_ppp_international_dollars <- read_excel("API_NY.GDP.MKTP.PP.CD_DS2_en_excel_v2_175524.xls", 
+    sheet = "Data", skip = 2)
+gdp_ppp_international_dollars <- clean_names(gdp_ppp_international_dollars)
+
+gdp_ppp_international_dollars <- gdp_ppp_international_dollars %>% 
+  select(country_name, x2024) %>%
+  filter(country_name %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+
+head(gdp_ppp_international_dollars)
+
+# =============== L
+# https://data.worldbank.org/indicator/SL.TLF.TOTL.IN
+
+labor_force_total <- read_excel("API_SL.TLF.TOTL.IN_DS2_en_excel_v2_289.xls", 
+    skip = 2)
+labor_force_total <- clean_names(labor_force_total)
+
+labor_force_total <- labor_force_total %>% 
+  select(country_name, x2024) %>%
+  filter(country_name %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+
+head(labor_force_total)
+
+# =============== S
+# https://data.worldbank.org/indicator/NY.GNS.ICTR.ZS
+
+savings_rate_as_pct_gdp <- read_excel("API_NY.GNS.ICTR.ZS_DS2_en_excel_v2_330.xls", 
+    skip = 2)
+savings_rate_as_pct_gdp <- clean_names(savings_rate_as_pct_gdp)
+
+savings_rate_as_pct_gdp <- savings_rate_as_pct_gdp %>% 
+  select(country_name, x2023) %>%
+  filter(country_name %in% c('Ghana', 
+                    'Nigeria',
+                    "Cote d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States')) %>% 
+  mutate(x2023 = ifelse(country_name == "Togo", (16.498484 + 17.799610 + 19.5264093)/3, x2023),      # 2017 - 2019 Averaged Value
+         x2023 = ifelse(country_name == "Nigeria", median(x2023, na.rm = TRUE), x2023),              # Median of Countries
+         x2023 = ifelse(country_name == "Liberia", median(x2023, na.rm = TRUE), x2023),
+         country_name = ifelse(country_name == "Cote d'Ivoire", "Côte d'Ivoire", country_name),
+         x2023 = x2023 / 100) %>% 
+  rename(s = x2023)
+
+head(savings_rate_as_pct_gdp)
+
+# ================ PWT
+
+pwt_base <- read_excel("pwt110.xlsx", sheet = "Data")
+pwt_base <- clean_names(pwt_base)
+pwt_base <- pwt_base %>% 
+  select(country, year, rgdpo, rnna, emp, labsh) %>%
+  filter(country %in% c("Ghana", "Nigeria", "Côte d'Ivoire",
+                        "Senegal", "Cameroon", "Togo", 
+                        "Sierra Leone", "Liberia", "United States")) %>% 
+  filter(year >= 2022)
+
+# median for labor share of income
+pwt_base <- pwt_base %>%
+  mutate(labsh = ifelse(country == "Ghana", median(labsh, na.rm = TRUE), labsh),
+         labsh = ifelse(country == "Liberia", median(labsh, na.rm = TRUE), labsh))
+
+pwt_base <- pwt_base %>% 
+  mutate(y = rgdpo / emp,
+         k = rnna / emp,
+         n = ((emp / lag(emp)) -1),
+         d = 0.05,
+         a = (1 - labsh),
+         L = emp,
+         K = rnna,
+         Y = rgdpo,
+         A = Y / (K^a * L^(1 - a)))
+
+pwt_solow <- pwt_base %>% 
+  filter(year == 2023) %>% 
+  select(country, Y, A, K, L, y, k, a, n, d)
+
+pwt_solow <- pwt_solow %>%
+  left_join(
+    savings_rate_as_pct_gdp %>% select(country_name, s),
+    by = c("country" = "country_name"))
+
+```
+
+Feenstra, Robert C., Robert Inklaar and Marcel P. Timmer (2015), "The Next Generation of the Penn World Table" American Economic Review, 105(10), 3150-3182, available for download at www.ggdc.net/pwt
+
+```{r}
+# ================ Sierra Leone
+
+sierra_leone <- pwt_solow %>%
+  filter(country == "Sierra Leone")
+
+a <- sierra_leone$a[1]
+s <- sierra_leone$s[1]
+n <- sierra_leone$n[1]
+d <- sierra_leone$d[1]
+A <- sierra_leone$A[1]
+
+# Continuous Curve
+solow_df <- data.frame(
+  k = seq(0, sierra_leone$k[1] * 2, length.out = 500)) %>%
+  mutate(y = A * k^a,
+         sfk = s * y,
+         break_even = (n + d) * k)
+
+# Steady State
+k_star <- ((s * A) / (n + d))^(1 / (1 - a))
+y_star <- A * k_star^a
+sfk_star <- s * y_star
+
+# Graph with Current Values
+
+last_point <- solow_df %>%
+  slice_tail(n = 1)
+
+
+ggplot(solow_df, aes(x = k)) +
+  geom_line(aes(y = y), linewidth = 1, color = "black") +
+  geom_line(aes(y = sfk), linewidth = 1.2, color = "darkgreen") +
+  geom_line(aes(y = break_even), linewidth = 1.2, color = "red") +
+  
+  geom_vline(xintercept = k_star, linetype = "dotted") +
+  geom_point(aes(x = k_star, y = sfk_star), size = 2) +
+  
+  # ✅ Labels at end of lines
+  annotate("text", 
+           x = last_point$k, 
+           y = last_point$y, 
+           label = "y = f(k)", 
+           hjust = -0.1) +
+  
+  annotate("text", 
+           x = last_point$k, 
+           y = last_point$sfk, 
+           label = "s f(k)", 
+           color = "darkgreen",
+           hjust = -0.1) +
+  
+  annotate("text", 
+           x = last_point$k, 
+           y = last_point$break_even, 
+           label = "(n + d)k", 
+           color = "red",
+           hjust = -0.1) +
+  
+  labs(
+    title = "Solow Growth Model - Sierra Leone",
+    x = "Capital per Worker (k)",
+    y = "Output / Investment per Worker"
+  ) +
+  
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid = element_blank(),
+    axis.line = element_line(color = "black", linewidth = 0.8),
+    axis.ticks = element_line(color = "black"),
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  ) +
+  coord_cartesian(xlim = c(0, max(solow_df$k) * 1.15), clip = "off")
+
+```
