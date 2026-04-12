@@ -552,11 +552,11 @@ b_ready_business_entry %>%
     x = `Business Entry Overall`,
     y = reorder(Economy, `Business Entry Overall`)
   )) +
-  geom_col(fill = "#7FE8D7") +
+  geom_col(fill = "#FF8C7F") +
   
   geom_text(aes(label = round(`Business Entry Overall`, 1)),
             hjust = -0.1,
-            color = "#7FE8D7",
+            color = "#FF8C7F",
             size = 4) +
   
   scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
@@ -577,11 +577,11 @@ b_ready_business_location %>%
     x = `Business Location Overall`,
     y = reorder(Economy, `Business Location Overall`)
   )) +
-  geom_col(fill = "#7FE8D7") +
+  geom_col(fill = "#FF8C7F") +
   
   geom_text(aes(label = round(`Business Location Overall`, 1)),
             hjust = -0.1,
-            color = "#7FE8D7",
+            color = "#FF8C7F",
             size = 4) +
   
   scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
@@ -602,11 +602,11 @@ b_ready_utility_services %>%
     x = `Utility Services Overall`,
     y = reorder(Economy, `Utility Services Overall`)
   )) +
-  geom_col(fill = "#7FE8D7") +
+  geom_col(fill = "#FF8C7F") +
   
   geom_text(aes(label = round(`Utility Services Overall`, 1)),
             hjust = -0.1,
-            color = "#7FE8D7",
+            color = "#FF8C7F",
             size = 4) +
   
   scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
@@ -627,11 +627,11 @@ b_ready_labor %>%
     x = `Labor Overall`,
     y = reorder(Economy, `Labor Overall`)
   )) +
-  geom_col(fill = "#7FE8D7") +
+  geom_col(fill = "#FF8C7F") +
   
   geom_text(aes(label = round(`Labor Overall`, 1)),
             hjust = -0.1,
-            color = "#7FE8D7",
+            color = "#FF8C7F",
             size = 4) +
   
   scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
@@ -652,11 +652,11 @@ b_ready_financial_services %>%
     x = `Financial Services Overall`,
     y = reorder(Economy, `Financial Services Overall`)
   )) +
-  geom_col(fill = "#7FE8D7") +
+  geom_col(fill = "#FF8C7F") +
   
   geom_text(aes(label = round(`Financial Services Overall`, 1)),
             hjust = -0.1,
-            color = "#7FE8D7",
+            color = "#FF8C7F",
             size = 4) +
   
   scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
@@ -677,11 +677,11 @@ b_ready_international_trade %>%
     x = `International Trade Overall`,
     y = reorder(Economy, `International Trade Overall`)
   )) +
-  geom_col(fill = "#7FE8D7") +
+  geom_col(fill = "#FF8C7F") +
   
   geom_text(aes(label = round(`International Trade Overall`, 1)),
             hjust = -0.1,
-            color = "#7FE8D7",
+            color = "#FF8C7F",
             size = 4) +
   
   scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
@@ -702,11 +702,11 @@ b_ready_taxation %>%
     x = `Taxation Overall`,
     y = reorder(Economy, `Taxation Overall`)
   )) +
-  geom_col(fill = "#7FE8D7") +
+  geom_col(fill = "#FF8C7F") +
   
   geom_text(aes(label = round(`Taxation Overall`, 1)),
             hjust = -0.1,
-            color = "#7FE8D7",
+            color = "#FF8C7F",
             size = 4) +
   
   scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
@@ -727,11 +727,11 @@ b_ready_dispute_resolution %>%
     x = `Dispute Resolution Overall`,
     y = reorder(Economy, `Dispute Resolution Overall`)
   )) +
-  geom_col(fill = "#7FE8D7") +
+  geom_col(fill = "#FF8C7F") +
   
   geom_text(aes(label = round(`Dispute Resolution Overall`, 1)),
             hjust = -0.1,
-            color = "#7FE8D7",
+            color = "#FF8C7F",
             size = 4) +
   
   scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
@@ -752,11 +752,11 @@ b_ready_market_competition %>%
     x = `Market Competition Overall`,
     y = reorder(Economy, `Market Competition Overall`)
   )) +
-  geom_col(fill = "#7FE8D7") +
+  geom_col(fill = "#FF8C7F") +
   
   geom_text(aes(label = round(`Market Competition Overall`, 1)),
             hjust = -0.1,
-            color = "#7FE8D7",
+            color = "#FF8C7F",
             size = 4) +
   
   scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
@@ -777,11 +777,11 @@ b_ready_business_insolvency %>%
     x = `Business Insolvency Overall`,
     y = reorder(Economy, `Business Insolvency Overall`)
   )) +
-  geom_col(fill = "#7FE8D7") +
+  geom_col(fill = "#FF8C7F") +
   
   geom_text(aes(label = round(`Business Insolvency Overall`, 1)),
             hjust = -0.1,
-            color = "#7FE8D7",
+            color = "#FF8C7F",
             size = 4) +
   
   scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
@@ -830,12 +830,12 @@ corruption_index %>%
     x = Score,
     y = reorder(Country, Score)
   )) +
-  geom_col(fill = "#7FE8D7") +
+  geom_col(fill = "#7B83EB") +
   
   # ✅ Label: Score (Rank)
   geom_text(aes(label = paste0(round(Score, 1), " (", Rank, ")")),
             hjust = -0.1,
-            color = "#7FE8D7",
+            color = "#7B83EB",
             size = 4) +
   
   scale_x_continuous(breaks = seq(0, 100, 10)) +
@@ -877,7 +877,7 @@ savings_rate_as_pct_gdp <- savings_rate_as_pct_gdp %>%
 # Parameters to Adjust (Must be in % format)
 Nigeria_Savings_Rate = median(savings_rate_as_pct_gdp$x2023, na.rm = TRUE)
 Liberia_Savings_Rate = median(savings_rate_as_pct_gdp$x2023, na.rm = TRUE)
-Togo_Savings_Rate    = (16.498484 + 17.799610 + 19.5264093)/3
+Togo_Savings_Rate    = (16.498484 * 17.799610 * 19.5264093)^(1/3)
 
 savings_rate_as_pct_gdp <- savings_rate_as_pct_gdp %>% 
   mutate(x2023 = ifelse(country_name == "Togo", Togo_Savings_Rate, x2023),
@@ -984,7 +984,7 @@ pwt_solow_ft
 
 All data was taken from the Penn World Table (https://www.rug.nl/ggdc/productivity/pwt/). The World Bank was used for the savings rate which was taken as Gross Savings % GDP (https://data.worldbank.org/indicator/NY.GNS.ICTR.ZS). The most recent available data is from 2023. The depreciate rate I found was not given anywhere, so we are to assume 5%.\
 
-Important Note: Savings Rate is missing for Togo, Nigeria, and Liberia. To correct this, the last three known values for Togo are averaged (2017-2019) to calculate the current value. For Nigeria and Liberia, the median from all the countries in our report was taken. The same thing is done for Ghana and Liberia in finding alpha or capital share of income.\
+Important Note: Savings Rate is missing for Togo, Nigeria, and Liberia. To correct this, the last three known values for Togo are a geometric average (2017-2019) to calculate the current value. For Nigeria and Liberia, the median from all the countries in our report was taken. The same thing is done for Ghana and Liberia in finding alpha or capital share of income.\
 
 Import Note: All values are able to be adjusted, so if you found a different number I can put it into the model.\
 
