@@ -3,6 +3,15 @@ title: "Business Ready"
 editor: visual
 ---
 
+```{r}
+library(readr)
+library(dplyr)
+library(janitor)
+library(readxl)
+library(ggplot2)
+library(flextable)
+```
+
 ## Business Ready - The World Bank
 
 These reflect the overall index scores from the business ready dataset. Not included are the specific pillars in each of the categories, but the data is stored so I can create graphs if that would be meaningful for analysis or comparison.\
