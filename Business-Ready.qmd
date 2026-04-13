@@ -4,6 +4,8 @@ editor: visual
 ---
 
 ```{r}
+options(scipen = 999)
+
 library(readr)
 library(dplyr)
 library(janitor)

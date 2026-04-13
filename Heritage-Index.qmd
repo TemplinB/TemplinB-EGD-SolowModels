@@ -6,6 +6,8 @@ editor: visual
 # Heritage Index of Economic Freedom
 
 ```{r}
+options(scipen = 999)
+
 library(readr)
 library(dplyr)
 library(janitor)
@@ -443,52 +445,56 @@ plot_heritage_by_variable <- function(country_name, data) {
 }
 ```
 
-### Ghana
+::: {.panel-tabset}
+
+## Ghana
 
 ```{r}
 plot_heritage_by_variable("Ghana", heritage_time)
 ```
 
-### Nigeria
+## Nigeria
 
 ```{r}
 plot_heritage_by_variable("Nigeria", heritage_time)
 ```
 
-### Côte d'Ivoire
+## Côte d'Ivoire
 
 ```{r}
 plot_heritage_by_variable("Côte d'Ivoire", heritage_time)
 ```
 
-### Senegal
+## Senegal
 
 ```{r}
 plot_heritage_by_variable("Senegal", heritage_time)
 ```
 
-### Cameroon
+## Cameroon
 
 ```{r}
 plot_heritage_by_variable("Cameroon", heritage_time)
 ```
 
-### Togo
+## Togo
 
 ```{r}
 plot_heritage_by_variable("Togo", heritage_time)
 ```
 
-### Sierra Leone
+## Sierra Leone
 
 ```{r}
 plot_heritage_by_variable("Sierra Leone", heritage_time)
 ```
 
-### Liberia
+## Liberia
 
 ```{r}
 plot_heritage_by_variable("Liberia", heritage_time)
 ```
+
+:::
 
 :::

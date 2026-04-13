@@ -6,6 +6,8 @@ editor: visual
 # Corruptions Perception Index - Transperancy International
 
 ```{r}
+options(scipen = 999)
+
 library(readr)
 library(dplyr)
 library(janitor)
