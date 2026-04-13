@@ -1,0 +1,430 @@
+---
+title: "Business Ready"
+editor: visual
+---
+
+## Business Ready - The World Bank
+
+These reflect the overall index scores from the business ready dataset. Not included are the specific pillars in each of the categories, but the data is stored so I can create graphs if that would be meaningful for analysis or comparison.\
+
+```{r}
+
+# ======== Pillar Score ========
+
+b_ready_index <- read_excel("01_B-READY-2025-PILLAR-TOPIC-SCORES.xlsx", sheet = "00_B-READY_Pillar_Score")
+b_ready_index <- b_ready_index %>%
+  select(-`Economy Code`) %>% 
+  filter(Economy %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+
+# ======== Business Entry ========
+
+b_ready_business_entry <- read_excel("01_B-READY-2025-PILLAR-TOPIC-SCORES.xlsx", sheet = "01_Business_Entry", skip = 3)
+b_ready_business_entry <- b_ready_business_entry %>%
+ select(Economy, `Business Entry Overall`, `Pillar 1 Overall`, `Pillar 2 Overall`, `Pillar 3 Overall`) %>%
+ filter(Economy %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+
+# ======== Business Location ========
+
+b_ready_business_location <- read_excel("01_B-READY-2025-PILLAR-TOPIC-SCORES.xlsx", sheet = "02_Business_Location", skip = 3)
+b_ready_business_location <- b_ready_business_location %>% 
+ select(Economy, `Business Location Overall`, `Pillar 1 Overall`, `Pillar 2 Overall`, `Pillar 3 Overall`) %>% 
+ filter(Economy %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+
+# ======== Utility Services ========
+
+b_ready_utility_services <- read_excel("01_B-READY-2025-PILLAR-TOPIC-SCORES.xlsx", sheet = "03_Utility_Services", skip = 3)
+b_ready_utility_services <- b_ready_utility_services %>% 
+ select(Economy, `Utility Services Overall`, `Pillar 1 Overall`, `Pillar 2 Overall`, `Pillar 3 Overall`) %>% 
+ filter(Economy %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+
+# ======== Labor ========
+
+b_ready_labor <- read_excel("01_B-READY-2025-PILLAR-TOPIC-SCORES.xlsx", sheet = "04_Labor", skip = 3)
+b_ready_labor <- b_ready_labor %>% 
+ select(Economy, `Labor Overall`, `Pillar 1 Overall`, `Pillar 2 Overall`, `Pillar 3 Overall`) %>% 
+ filter(Economy %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+
+# ======== Financial Services ========
+
+b_ready_financial_services <- read_excel("01_B-READY-2025-PILLAR-TOPIC-SCORES.xlsx", sheet = "05_Financial_Services", skip = 3)
+b_ready_financial_services <- b_ready_financial_services %>% 
+ select(Economy, `Financial Services Overall`, `Pillar 1 Overall`, `Pillar 2 Overall`, `Pillar 3 Overall`) %>% 
+ filter(Economy %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+
+# ======== International Trade ========
+
+b_ready_international_trade <- read_excel("01_B-READY-2025-PILLAR-TOPIC-SCORES.xlsx", sheet = "06_International_Trade", skip = 3)
+b_ready_international_trade <- b_ready_international_trade %>% 
+ select(Economy, `International Trade Overall`, `Pillar 1 Overall`, `Pillar 2 Overall`, `Pillar 3 Overall`) %>% 
+ filter(Economy %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+
+# ======== Taxation ========
+
+b_ready_taxation <- read_excel("01_B-READY-2025-PILLAR-TOPIC-SCORES.xlsx", sheet = "07_Taxation", skip = 3)
+b_ready_taxation <- b_ready_taxation %>% 
+ select(Economy, `Taxation Overall`, `Pillar 1 Overall`, `Pillar 2 Overall`, `Pillar 3 Overall`) %>% 
+ filter(Economy %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+
+# ======== Dispute Resolution ========
+
+b_ready_dispute_resolution <- read_excel("01_B-READY-2025-PILLAR-TOPIC-SCORES.xlsx", sheet = "08_Dispute_Resolution", skip = 3)
+b_ready_dispute_resolution <- b_ready_dispute_resolution %>% 
+ select(Economy, `Dispute Resolution Overall`, `Pillar 1 Overall`, `Pillar 2 Overall`, `Pillar 3 Overall`) %>% 
+ filter(Economy %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+
+# ======== Market Competition ========
+
+b_ready_market_competition <- read_excel("01_B-READY-2025-PILLAR-TOPIC-SCORES.xlsx", sheet = "09_Market_Competition", skip = 3)
+b_ready_market_competition <- b_ready_market_competition %>% 
+ select(Economy, `Market Competition Overall`, `Pillar 1 Overall`, `Pillar 2 Overall`, `Pillar 3 Overall`) %>% 
+ filter(Economy %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+
+# ======== Business Insolvency ========
+
+b_ready_business_insolvency <- read_excel("01_B-READY-2025-PILLAR-TOPIC-SCORES.xlsx", sheet = "10_Business_Insolvency", skip = 3)
+b_ready_business_insolvency <- b_ready_business_insolvency %>% 
+ select(Economy, `Business Insolvency Overall`, `Pillar 1 Overall`, `Pillar 2 Overall`, `Pillar 3 Overall`) %>% 
+ filter(Economy %in% c('Ghana', 
+                    'Nigeria',
+                    "Côte d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States'))
+
+```
+
+```{r}
+# ======== Business Entry ========
+
+b_ready_business_entry %>%
+  ggplot(aes(
+    x = `Business Entry Overall`,
+    y = reorder(Economy, `Business Entry Overall`)
+  )) +
+  geom_col(fill = "#FF8C7F") +
+  
+  geom_text(aes(label = round(`Business Entry Overall`, 1)),
+            hjust = -0.1,
+            color = "#FF8C7F",
+            size = 4) +
+  
+  scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
+  labs(
+    title = "Business Entry Overall by Country",
+    x = "Business Entry Overall",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ======== Business Location ========
+
+b_ready_business_location %>%
+  ggplot(aes(
+    x = `Business Location Overall`,
+    y = reorder(Economy, `Business Location Overall`)
+  )) +
+  geom_col(fill = "#FF8C7F") +
+  
+  geom_text(aes(label = round(`Business Location Overall`, 1)),
+            hjust = -0.1,
+            color = "#FF8C7F",
+            size = 4) +
+  
+  scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
+  labs(
+    title = "Business Location Overall by Country",
+    x = "Business Location Overall",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ======== Utility Services ========
+
+b_ready_utility_services %>%
+  ggplot(aes(
+    x = `Utility Services Overall`,
+    y = reorder(Economy, `Utility Services Overall`)
+  )) +
+  geom_col(fill = "#FF8C7F") +
+  
+  geom_text(aes(label = round(`Utility Services Overall`, 1)),
+            hjust = -0.1,
+            color = "#FF8C7F",
+            size = 4) +
+  
+  scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
+  labs(
+    title = "Utility Services Overall by Country",
+    x = "Utility_Services Overall",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ======== Labor ========
+
+b_ready_labor %>%
+  ggplot(aes(
+    x = `Labor Overall`,
+    y = reorder(Economy, `Labor Overall`)
+  )) +
+  geom_col(fill = "#FF8C7F") +
+  
+  geom_text(aes(label = round(`Labor Overall`, 1)),
+            hjust = -0.1,
+            color = "#FF8C7F",
+            size = 4) +
+  
+  scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
+  labs(
+    title = "Labor Overall by Country",
+    x = "Labor Overall",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ======== Financial Services ========
+
+b_ready_financial_services %>%
+  ggplot(aes(
+    x = `Financial Services Overall`,
+    y = reorder(Economy, `Financial Services Overall`)
+  )) +
+  geom_col(fill = "#FF8C7F") +
+  
+  geom_text(aes(label = round(`Financial Services Overall`, 1)),
+            hjust = -0.1,
+            color = "#FF8C7F",
+            size = 4) +
+  
+  scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
+  labs(
+    title = "Financial Services Overall by Country",
+    x = "Financial Services Overall",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ======== International Trade ========
+
+b_ready_international_trade %>%
+  ggplot(aes(
+    x = `International Trade Overall`,
+    y = reorder(Economy, `International Trade Overall`)
+  )) +
+  geom_col(fill = "#FF8C7F") +
+  
+  geom_text(aes(label = round(`International Trade Overall`, 1)),
+            hjust = -0.1,
+            color = "#FF8C7F",
+            size = 4) +
+  
+  scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
+  labs(
+    title = "International Trade Overall by Country",
+    x = "International Trade Overall",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ======== Taxation ========
+
+b_ready_taxation %>%
+  ggplot(aes(
+    x = `Taxation Overall`,
+    y = reorder(Economy, `Taxation Overall`)
+  )) +
+  geom_col(fill = "#FF8C7F") +
+  
+  geom_text(aes(label = round(`Taxation Overall`, 1)),
+            hjust = -0.1,
+            color = "#FF8C7F",
+            size = 4) +
+  
+  scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
+  labs(
+    title = "Taxation Overall by Country",
+    x = "Taxation Overall",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ======== Dispute Resolution ========
+
+b_ready_dispute_resolution %>%
+  ggplot(aes(
+    x = `Dispute Resolution Overall`,
+    y = reorder(Economy, `Dispute Resolution Overall`)
+  )) +
+  geom_col(fill = "#FF8C7F") +
+  
+  geom_text(aes(label = round(`Dispute Resolution Overall`, 1)),
+            hjust = -0.1,
+            color = "#FF8C7F",
+            size = 4) +
+  
+  scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
+  labs(
+    title = "Dispute Resolution Overall by Country",
+    x = "Dispute Resolution Overall",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ======== Market Competition ========
+
+b_ready_market_competition %>%
+  ggplot(aes(
+    x = `Market Competition Overall`,
+    y = reorder(Economy, `Market Competition Overall`)
+  )) +
+  geom_col(fill = "#FF8C7F") +
+  
+  geom_text(aes(label = round(`Market Competition Overall`, 1)),
+            hjust = -0.1,
+            color = "#FF8C7F",
+            size = 4) +
+  
+  scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
+  labs(
+    title = "Market Competition Overall by Country",
+    x = "Market Competition Overall",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# ======== Business Insolvency ========
+
+b_ready_business_insolvency %>%
+  ggplot(aes(
+    x = `Business Insolvency Overall`,
+    y = reorder(Economy, `Business Insolvency Overall`)
+  )) +
+  geom_col(fill = "#FF8C7F") +
+  
+  geom_text(aes(label = round(`Business Insolvency Overall`, 1)),
+            hjust = -0.1,
+            color = "#FF8C7F",
+            size = 4) +
+  
+  scale_x_continuous(limits = c(0, 100), breaks = seq(0, 100, 10)) +
+  labs(
+    title = "Business Insolvency Overall by Country",
+    x = "Business Insolvency Overall",
+    y = "Country"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+```

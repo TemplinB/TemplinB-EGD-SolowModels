@@ -7,6 +7,14 @@ website:
     left:
       - text: "Home"
         file: index.qmd
+      - text: "Freedom"
+        file: Heritage-Index.qmd
+      - text: "Business"
+        file: Business-Ready.qmd
+      - text: "Corruption"
+        file: Corruption-Index.qmd
+      - text: "Solow"
+        file: Solow-Models.qmd
 
 format:
   html:

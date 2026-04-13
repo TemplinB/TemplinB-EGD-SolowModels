@@ -1,0 +1,60 @@
+---
+title: "Corruption Index"
+editor: visual
+---
+
+## Corruptions Perception Index - Transperancy International
+
+Below is a bar graph which each nations corruption index score followed by their rank in parenthesis.\
+
+```{r}
+# Import Dataframe from Corruption Index
+corruption_index <- read_excel("CPI2025_Results.xlsx", skip = 2)
+corruption_index <- corruption_index %>% 
+  select(`Country / Territory`, `CPI 2025 score`, Rank) %>% 
+  mutate(Country = `Country / Territory`,
+         Score = `CPI 2025 score`) %>%
+  filter(Country %in% c('Ghana', 
+                    'Nigeria',
+                    "Cote d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States of America')) %>% 
+  select(-`Country / Territory`, -`CPI 2025 score`) %>% 
+  mutate(Country = ifelse(Country == "United States of America", "United States", Country),
+         Country = ifelse(Country == "Cote d'Ivoire", "Côte d'Ivoire", Country))
+
+```
+
+```{r}
+# Graph for Corruption Index
+corruption_index %>%
+  ggplot(aes(
+    x = Score,
+    y = reorder(Country, Score)
+  )) +
+  geom_col(fill = "#7B83EB") +
+  
+  # ✅ Label: Score (Rank)
+  geom_text(aes(label = paste0(round(Score, 1), " (", Rank, ")")),
+            hjust = -0.1,
+            color = "#7B83EB",
+            size = 4) +
+  
+  scale_x_continuous(breaks = seq(0, 100, 10)) +
+  coord_cartesian(xlim = c(0, 105)) +
+  
+  labs(
+    title = "Corruption Perceptions Index (2025)",
+    x = "Score",
+    y = "Country"
+  ) +
+  
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+```
