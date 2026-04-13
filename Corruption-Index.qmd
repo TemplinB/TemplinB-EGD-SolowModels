@@ -3,6 +3,8 @@ title: "Corruption Index"
 editor: visual
 ---
 
+# Corruptions Perception Index - Transperancy International
+
 ```{r}
 library(readr)
 library(dplyr)
@@ -10,9 +12,12 @@ library(janitor)
 library(readxl)
 library(ggplot2)
 library(flextable)
+library(tidyr)
 ```
 
-## Corruptions Perception Index - Transperancy International
+::: {.panel-tabset}
+
+## 2025
 
 Below is a bar graph which each nations corruption index score followed by their rank in parenthesis.\
 
@@ -67,3 +72,106 @@ corruption_index %>%
     plot.title = element_text(face = "bold", hjust = 0.5)
   )
 ```
+
+## Timeseries
+
+```{r}
+CPI2025_Results <- read_excel("CPI2025_Results.xlsx", 
+    sheet = "CPI Timeseries 2012 - 2025", 
+    skip = 2)
+
+corruption_time <- clean_names(CPI2025_Results)
+
+corruption_time <- corruption_time %>% 
+  
+  select(country_territory ,cpi_score_2025, cpi_score_2024, cpi_score_2023 ,cpi_score_2022, cpi_score_2021, cpi_score_2021, cpi_score_2020, cpi_score_2019, cpi_score_2018, cpi_score_2017, cpi_score_2016, cpi_score_2015, cpi_score_2014, cpi_score_2013, cpi_score_2012) %>% 
+  
+  filter(country_territory %in% c('Ghana', 
+                    'Nigeria',
+                    "Cote d'Ivoire",
+                    'Senegal',
+                    'Cameroon',
+                    'Togo',
+                    'Sierra Leone',
+                    'Liberia',
+                    'United States of America')) %>% 
+  mutate(country_territory = ifelse(country_territory == "United States of America", "United States", country_territory),
+         country_territory = ifelse(country_territory == "Cote d'Ivoire", "Côte d'Ivoire", country_territory))
+```
+
+```{r}
+corruption_time_long <- corruption_time %>%
+  pivot_longer(
+    cols = starts_with("cpi_score"),
+    names_to = "year",
+    values_to = "score"
+  ) %>%
+  mutate(year = as.numeric(gsub("cpi_score_", "", year)))
+
+ggplot(corruption_time_long, aes(x = year, y = score, color = country_territory, group = country_territory)) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 2) +
+  
+  scale_x_continuous(breaks = seq(2012, 2025, 1)) +
+  scale_y_continuous(limits = c(0, 100)) +
+  
+  labs(
+    title = "Corruption Perceptions Index Over Time (2012-2025)",
+    x = "Year",
+    y = "CPI Score",
+    color = "Country"
+  ) +
+  
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "right"
+  )
+```
+```{r}
+plot_corruption <- function(country_name, data) {
+  
+  data %>%
+    filter(country_territory == country_name) %>%
+    pivot_longer(
+      cols = starts_with("cpi_score"),
+      names_to = "year",
+      values_to = "score"
+    ) %>%
+    mutate(year = as.numeric(gsub("cpi_score_", "", year))) %>%
+    
+    ggplot(aes(x = year, y = score)) +
+    geom_line(linewidth = 1.2, color = "#7B83EB") +
+    geom_point(size = 2, color = "#7B83EB") +
+    
+    scale_x_continuous(breaks = seq(2012, 2025, 1)) +
+    scale_y_continuous(limits = c(0, 100)) +
+    
+    labs(
+      title = paste("Corruption Perceptions Index -", country_name),
+      x = "Year",
+      y = "CPI Score"
+    ) +
+    
+    theme_minimal(base_size = 14) +
+    theme(
+      plot.title = element_text(face = "bold", hjust = 0.5),
+      axis.text.x = element_text(angle = 45, hjust = 1)
+    )
+}
+```
+
+```{r}
+plot_corruption("Ghana", corruption_time)
+plot_corruption("Nigeria", corruption_time)
+plot_corruption("Côte d'Ivoire", corruption_time)
+plot_corruption("Senegal", corruption_time)
+plot_corruption("Cameroon", corruption_time)
+plot_corruption("Togo", corruption_time)
+plot_corruption("Sierra Leone", corruption_time)
+plot_corruption("Liberia", corruption_time)
+plot_corruption("United States", corruption_time)
+```
+
+:::

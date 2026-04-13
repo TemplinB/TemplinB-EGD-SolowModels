@@ -3,6 +3,8 @@ title: "Heritage Index of Economic Freedom"
 editor: visual
 ---
 
+# Heritage Index of Economic Freedom
+
 ```{r}
 library(readr)
 library(dplyr)
@@ -10,9 +12,12 @@ library(janitor)
 library(readxl)
 library(ggplot2)
 library(flextable)
+library(stringr)
 ```
 
-## Heritage Index of Economic Freedom
+::: {.panel-tabset}
+
+## 2025
 
 ```{r}
 # Read in Dataset and Clean
@@ -352,3 +357,138 @@ heritage_2025 %>%
   )
 
 ```
+
+## Timeseries
+
+```{r}
+# Read in Dataset and Clean
+heritage_index <- read_csv("heritage-index-of-economic-freedom-2026-03-25_1950.csv")
+heritage_index <- clean_names(heritage_index)
+
+# Subsetted Dataframe with Relevant Countries
+heritage_time <- heritage_index %>% 
+    filter(country %in% c('Ghana', 
+                          'Nigeria',
+                          "Côte d'Ivoire",
+                          'Senegal',
+                          'Cameroon',
+                          'Togo',
+                          'Sierra Leone',
+                          'Liberia',
+                          'United States'))
+```
+
+```{r}
+heritage_time %>%
+  mutate(overall_score = as.numeric(overall_score)) %>%
+  
+  ggplot(aes(x = index_year, y = overall_score, color = country, group = country)) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 2) +
+  
+  scale_x_continuous(breaks = seq(1995, 2026, 2)) +
+  scale_y_continuous(limits = c(0, 100)) +
+  
+  labs(
+    title = "Heritage Index of Economic Freedom Over Time",
+    x = "Year",
+    y = "Overall Score",
+    color = "Country"
+  ) +
+  
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "right"
+  )
+```
+
+```{r}
+plot_heritage_by_variable <- function(country_name, data) {
+  
+  heritage_vars <- c("overall_score", "property_rights", "government_integrity", 
+                     "judicial_effectiveness", "tax_burden", "government_spending",
+                     "fiscal_health", "business_freedom", "labor_freedom", 
+                     "monetary_freedom", "trade_freedom", "investment_freedom", 
+                     "financial_freedom")
+  
+  for (var in heritage_vars) {
+    
+    p <- data %>%
+      filter(country == country_name) %>%
+      mutate(score = as.numeric(.data[[var]])) %>%
+      
+      ggplot(aes(x = index_year, y = score)) +
+      geom_line(linewidth = 1.2, color = "#7FE8D7") +
+      geom_point(size = 2, color = "#7FE8D7") +
+      
+      scale_x_continuous(breaks = seq(1995, 2026, 2)) +
+      scale_y_continuous(limits = c(0, 100)) +
+      
+      labs(
+        title = paste(str_to_title(gsub("_", " ", var)), "-", country_name),
+        x = "Year",
+        y = "Score"
+      ) +
+      
+      theme_minimal(base_size = 14) +
+      theme(
+        plot.title = element_text(face = "bold", hjust = 0.5),
+        axis.text.x = element_text(angle = 45, hjust = 1)
+      )
+    
+    print(p)
+  }
+}
+```
+
+### Ghana
+
+```{r}
+plot_heritage_by_variable("Ghana", heritage_time)
+```
+
+### Nigeria
+
+```{r}
+plot_heritage_by_variable("Nigeria", heritage_time)
+```
+
+### Côte d'Ivoire
+
+```{r}
+plot_heritage_by_variable("Côte d'Ivoire", heritage_time)
+```
+
+### Senegal
+
+```{r}
+plot_heritage_by_variable("Senegal", heritage_time)
+```
+
+### Cameroon
+
+```{r}
+plot_heritage_by_variable("Cameroon", heritage_time)
+```
+
+### Togo
+
+```{r}
+plot_heritage_by_variable("Togo", heritage_time)
+```
+
+### Sierra Leone
+
+```{r}
+plot_heritage_by_variable("Sierra Leone", heritage_time)
+```
+
+### Liberia
+
+```{r}
+plot_heritage_by_variable("Liberia", heritage_time)
+```
+
+:::

@@ -3,6 +3,8 @@ title: "Solow Model"
 editor: visual
 ---
 
+# Solow Growth Models - Penn World Table & World Bank
+
 ```{r}
 library(readr)
 library(dplyr)
@@ -11,8 +13,6 @@ library(readxl)
 library(ggplot2)
 library(flextable)
 ```
-
-## Solow Growth Models - Penn World Table & World Bank
 
 ```{r}
 
